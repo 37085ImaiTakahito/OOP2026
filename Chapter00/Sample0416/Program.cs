@@ -10,6 +10,8 @@
                 Console.WriteLine("Hello, World!");
                 j++;
             }
+
+            Console.WriteLine(j + "回繰り返しました");
         }
     }
 }
