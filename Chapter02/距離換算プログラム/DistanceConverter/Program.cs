@@ -6,25 +6,29 @@ namespace DistanceConverter
     {
         static void Main(string[] args)
         {
-            int start = int.Parse(args[1]);
-            int stop = int.Parse(args[2]);
-
-            if (args.Length >= 1 && args[0] == "-tom")
+            if (args.Length == 3
+                && int.TryParse(args[1], out int start)&& int.TryParse(args[2], out int stop))
             {
-                PrintFeetToMeterList(start,stop);
-            }
-            else if (args.Length >= 1 && args[0] == "-tof")
-            {
-                PrintMeterToFeetList(start,stop);
+                if (args[0] == "-tom")
+                {
+                    PrintFeetToMeterList(start, stop);
+                }
+                else if (args[0] == "-tof")
+                {
+                    PrintMeterToFeetList(start, stop);
+                }
+                else
+                {
+                    Console.WriteLine("引数形式エラー");
+                }
             }
             else
             {
-                Console.WriteLine("エラー！");
+                Console.WriteLine("引数エラー");
             }
+        }
 
-            }
-
-        private static void PrintFeetToMeterList(int start,int stop)
+        private static void PrintFeetToMeterList(int start, int stop)
         {
             //フィートからメートルへの対応表を出力
             for (int feet = start; feet <= stop; feet++)
@@ -55,4 +59,6 @@ namespace DistanceConverter
             return meter / 0.3048;
         }
     }
+
 }
+
