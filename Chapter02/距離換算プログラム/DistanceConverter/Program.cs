@@ -6,14 +6,20 @@ namespace DistanceConverter
     {
         static void Main(string[] args)
         {
+            int start = int.Parse(args[1]);
+            int stop = int.Parse(args[2]);
 
             if (args.Length >= 1 && args[0] == "-tom")
             {
-                PrintFeetToMeterList(1,10);
+                PrintFeetToMeterList(start,stop);
+            }
+            else if (args.Length >= 1 && args[0] == "-tof")
+            {
+                PrintMeterToFeetList(start,stop);
             }
             else
             {
-                PrintMeterToFeetList(1,10);
+                Console.WriteLine("エラー！");
             }
 
             }
