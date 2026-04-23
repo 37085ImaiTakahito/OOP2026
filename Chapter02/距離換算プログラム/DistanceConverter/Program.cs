@@ -33,7 +33,8 @@ namespace DistanceConverter
             //フィートからメートルへの対応表を出力
             for (int feet = start; feet <= stop; feet++)
             {
-                double meter = FeetToMeter(feet);
+                FeetConverter converter = new FeetConverter();
+                double meter = converter.ToMeter(feet);
                 Console.WriteLine($"{feet}ft = {meter:0.0000}m");
             }
         }
@@ -43,20 +44,10 @@ namespace DistanceConverter
             //メートルからフィートへの対応表を出力
             for (int meter = start; meter <= stop; meter++)
             {
-                double feet = MeterToFeet(meter);
+                FeetConverter converter = new FeetConverter();
+                double feet = converter.FromMeter(meter);
                 Console.WriteLine($"{meter}m = {feet:0.0000}ft");
             }
-        }
-
-        //フィートからメートルを求める
-        static double FeetToMeter(int feet)
-        {
-            return feet * 0.3048;
-        }
-        //メートルからフィートを求める
-        static double MeterToFeet(int meter)
-        {
-            return meter / 0.3048;
         }
     }
 
