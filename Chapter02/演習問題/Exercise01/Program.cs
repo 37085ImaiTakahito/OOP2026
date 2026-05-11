@@ -1,0 +1,25 @@
+﻿
+
+namespace Exercise01 {
+    internal class Program {
+        static void Main(string[] args) {
+            var songs = new Song[] {
+                new Song("Let it be", "The Beatles",243),
+                new Song("Bridge Over Troubled Water","Simon & Garfunkel",293),
+                new Song("Close To You","Carpenters",276),
+                new Song("Honesrty","Billy joel",231),
+                new Song("I Will Always Love You","Whitney Houston",273),
+            };
+
+            PrintSongs(songs);
+        }
+
+        private static void PrintSongs(Song[] songs) {
+            foreach (var song in songs) {
+                Console.WriteLine($"{song.Title},{song.ArtistName},{song.Length / 60}:{song.Length % 60}");
+            }
+        }
+
+
+    }
+}
