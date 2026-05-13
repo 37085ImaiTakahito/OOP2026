@@ -4,6 +4,7 @@
             PrintInchToMeterList(1, 10);
         }
 
+        //インチからメートルの対応表を出力
         private static void PrintInchToMeterList(int start,int end) {
             for (int inch = start; inch <= end; inch++) {
                 double meter = InchConverter.ToMeter(inch);
