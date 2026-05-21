@@ -3,7 +3,7 @@ namespace Exercise01 {
     internal class Program {
         static void Main(string[] args) {
             var numbers = new List<int> { 12, 87, 94, 14, 53, 20, 40, 35, 76, 91, 31, 17, 48 };
-
+            #region
             // 3.1.1
             Exercise1(numbers);
             Console.WriteLine("-----");
@@ -18,17 +18,17 @@ namespace Exercise01 {
 
             // 3.1.4
             Exercise4(numbers);
+            #endregion
         }
 
         private static void Exercise1(List<int> numbers) {
             var exists = numbers.Exists(s => s % 8 == 0 || s % 9 == 0);
-            if(exists == true) {
+            if(exists == true) 
                 Console.WriteLine("存在している");
-            }
-            else {
+            
+            else 
                 Console.WriteLine("存在していない");
-            }
-            ;
+
         }
 
         private static void Exercise2(List<int> numbers) {
