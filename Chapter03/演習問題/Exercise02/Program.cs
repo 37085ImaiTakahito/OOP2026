@@ -45,9 +45,12 @@ namespace Exercise02 {
         }
 
         private static void Exercise2_4(List<string> cities) {
-            
-            var query = cities.Select(s => s.StartsWith('B'));
-            var sele = query.Where(s => query.Count('B'));
-        }//p135
+            var obj = cities.Where(s => s.StartsWith('B'))
+                .Select(s => new {s,s.Length});
+
+            foreach(var date in obj) {
+                Console.WriteLine(date.s + " " + date.Length + "文字");
+            }
+        }
     }
 }
