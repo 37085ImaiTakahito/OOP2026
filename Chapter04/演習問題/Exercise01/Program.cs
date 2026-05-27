@@ -1,4 +1,6 @@
 ﻿
+using System.Xml.Linq;
+
 namespace Exercise01 {
     internal class Program {
         static void Main(string[] args) {
@@ -51,8 +53,17 @@ namespace Exercise01 {
         }
 
         private static void Exercise3(List<string> langs) {
+            var exists = langs.Find(x => x.Length == 10);
+            if (exists is null) {
+                Console.WriteLine("unknown");
+            }
+            else {
+                foreach (var s in exists) {
+                    Console.WriteLine(s);
+                }
+            }
 
-
+            
         }
 
     }
