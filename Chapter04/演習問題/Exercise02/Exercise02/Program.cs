@@ -10,8 +10,9 @@ namespace Exercise02 {
             Exercise3();
         }
 
+        //p89~90参考
         private static void Exercise1() {
-            //if-else文を使用
+            //if-else文を使用 (コード4.9)
             Console.Write("文字を入力：");
             var langs = Console.Read();
             if(langs < 0) {
@@ -22,17 +23,17 @@ namespace Exercise02 {
                 Console.WriteLine(langs * 3);
             }
             else {
-                Co
+                Console.WriteLine(langs);
             }
         }
 
         private static void Exercise2() {
-            //switch文を使用
+            //switch文を使用 (コード4.10)
 
         }
 
         private static void Exercise3() {
-            //switch式を使用
+            //switch式を使用　(コード4.11)
 
 
         }
