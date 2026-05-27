@@ -12,7 +12,18 @@ namespace Exercise02 {
 
         private static void Exercise1() {
             //if-else文を使用
-            
+            Console.Write("文字を入力：");
+            var langs = Console.Read();
+            if(langs < 0) {
+                Console.WriteLine(langs);
+            }else if(langs < 100){
+                Console.WriteLine(langs * 2);
+            }else if(langs < 500) {
+                Console.WriteLine(langs * 3);
+            }
+            else {
+                Co
+            }
         }
 
         private static void Exercise2() {
