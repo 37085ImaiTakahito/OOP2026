@@ -1,6 +1,7 @@
-﻿
+﻿using Exercise01;
+
 namespace Exercise02 {
-    public class Program {
+     class Program {
         static void Main(string[] args) {
             // 5.2.1
             var ymCollection = new YearMonth[] {
@@ -23,10 +24,23 @@ namespace Exercise02 {
         }
 
         private static void Exercise2(YearMonth[] ymCollection) {
-            
+            foreach (var y in ymCollection) {
+                Console.WriteLine(y);
+            }
+        }
+
+        //5.2.3
+        private static YearMonth? FindFirst21C(YearMonth[] ymCollection) {
+            foreach(var ym in ymCollection) {
+                if (ym.Is21Century) {
+                    return ym;
+                }
+            }
+            return null;
         }
 
         private static void Exercise4(YearMonth[] ymCollection) {
+            var ym = FindFirst21C(ymCollection) ?? Console.WriteLine("");
             
         }
 

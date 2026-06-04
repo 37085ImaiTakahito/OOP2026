@@ -25,7 +25,7 @@ namespace Exercise01 {
             }
         }
 
-        public override string ToString() => Year + "年" + Month + "月";
+        public override string ToString() =>  $"{Year}  年  {Month} 月";
             
         
         
