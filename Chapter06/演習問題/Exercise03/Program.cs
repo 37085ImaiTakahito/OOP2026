@@ -30,8 +30,10 @@ namespace Exercise03 {
         }
 
         private static void Exercise2(string text) {
-            var str1 = text.Replace("big", "small");
-            Console.WriteLine(str1);
+            var str1 = Console.ReadLine();
+            var str2 = Console.ReadLine();
+            var rep = text.Replace(str1,str2);
+            Console.WriteLine(rep);
         }
 
         private static void Exercise3(string text) {
@@ -39,7 +41,7 @@ namespace Exercise03 {
         }
 
         private static void Exercise4(string text) {
-            
+            int count = text.Count(c => c == ' ' + 1);
         }
 
         private static void Exercise5(string text) {
