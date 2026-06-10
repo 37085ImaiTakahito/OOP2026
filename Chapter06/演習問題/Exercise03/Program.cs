@@ -41,7 +41,8 @@ namespace Exercise03 {
         }
 
         private static void Exercise4(string text) {
-            int count = text.Count(c => c == ' ' + 1);
+            int count = text.Split(' ').Length;
+            Console.WriteLine("単語数：" + count);
         }
 
         private static void Exercise5(string text) {
