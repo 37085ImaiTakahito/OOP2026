@@ -26,12 +26,15 @@ namespace Exercise03 {
 
         private static void Exercise1(string text) {
             int count = text.Count(c => c == ' ');
-            Console.WriteLine("空白数：" + count);
+            Console.WriteLine($"空白数：{count}");
         }
 
         private static void Exercise2(string text) {
+            Console.Write("検索：");
             var str1 = Console.ReadLine();
+            Console.Write("置換：");
             var str2 = Console.ReadLine();
+
             var rep = text.Replace(str1,str2);
             Console.WriteLine(rep);
         }
@@ -42,11 +45,14 @@ namespace Exercise03 {
 
         private static void Exercise4(string text) {
             int count = text.Split(' ').Length;
-            Console.WriteLine("単語数：" + count);
+            Console.WriteLine($"単語数：{count}");
         }
 
         private static void Exercise5(string text) {
-            
+            var str1 = text.Split(' ').Where(s => s.Length <= 4);
+            foreach(var s in str1) {
+                Console.WriteLine(s);
+            }
         }
 
         private static void Exercise6(string text) {
