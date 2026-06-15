@@ -1,4 +1,6 @@
 ﻿
+using System.Text;
+
 namespace Exercise03 {
     internal class Program {
         static void Main(string[] args) {
@@ -41,6 +43,11 @@ namespace Exercise03 {
 
         private static void Exercise3(string text) {
             //あとまわし
+            var sb = new StringBuilder();
+            foreach (var word in text) {
+                sb.Append(word);
+            }
+            Console.WriteLine(sb);
         }
 
         private static void Exercise4(string text) {
@@ -80,10 +87,12 @@ namespace Exercise03 {
             //配列を用いた集計
             var array = Enumerable.Repeat(0, 26).ToArray();
             foreach(var alph in str) {
-                array[alph - 'a']++;
+                if (alph >= 'a' && alph <= 'z') {
+                    array[alph - 'a']++;
+                }
             }
 
-            for(char ch = 'a'; ch <= 'z'; ch++) {
+            for (char ch = 'a'; ch <= 'z'; ch++) {
                 Console.WriteLine($"{ch}:{array[ch - 'a']}");
             }
 
