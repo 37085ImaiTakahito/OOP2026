@@ -42,12 +42,20 @@ namespace Exercise03 {
         }
 
         private static void Exercise3(string text) {
-            //あとまわし
-            var sb = new StringBuilder();
-            foreach (var word in text) {
+            var array = text.Split(' ');
+            var sb = new StringBuilder(array[0]);
+
+            foreach(var word in array.Skip(1)) {
+                sb.Append(' ');
                 sb.Append(word);
             }
-            Console.WriteLine(sb);
+            //sb.Append(array[0]);
+            //for(int i = 1;i < array.Length; i++) {
+            //    sb.Append(' ');
+            //    sb.Append(array[i]);
+            //}
+
+            Console.WriteLine(sb + ".");
         }
 
         private static void Exercise4(string text) {
