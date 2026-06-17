@@ -2,11 +2,20 @@
     internal class Program {
         static void Main(string[] args) {
             var line = "Novelist=谷崎潤一郎;BestWork=春琴抄;Born=1886";
-            var bookline = $"Novelist={novelist};BestWork={bestWork};Born={born}";
+            var line2 = line.Split(';', '=');
+            //var line3 = line2.Split('=');
 
+            for (int i = 1; i <= line2.Length; i++) {
+                if (1 == i % 2) {
+                    line2[i - 1] = ToJapanese(line2[i - 1]);
+                    Console.WriteLine(line2[i - 1]);
+                }
+                else {
+                    Console.WriteLine(line2[i-1]);
+                }
+            }
 
-
-
+          
         }
         static string ToJapanese(string key) {
             return key switch {
