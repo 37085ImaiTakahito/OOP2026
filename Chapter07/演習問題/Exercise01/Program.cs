@@ -31,7 +31,9 @@ namespace Exercise01 {
         }
 
         private static void Exercise2(int[] numbers) {
-
+            foreach (var number in numbers.TakeLast(2)) {
+                Console.WriteLine(number);
+            }
         }
 
         private static void Exercise3(int[] numbers) {
