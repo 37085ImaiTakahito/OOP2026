@@ -37,14 +37,19 @@ namespace Exercise01 {
         }
 
         private static void Exercise3(int[] numbers) {
-
+            //p173
+            foreach(var number in numbers.Select(x => x.ToString("000"))) {
+                Console.WriteLine(number);
+            }
         }
 
         private static void Exercise4(int[] numbers) {
+            //p175
 
         }
 
         private static void Exercise5(int[] numbers) {
+            //p174
 
         }
     }
