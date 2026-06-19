@@ -1,5 +1,6 @@
 ﻿
 using static System.Reflection.Metadata.BlobBuilder;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Exercise01 {
     internal class Program {
@@ -45,12 +46,16 @@ namespace Exercise01 {
 
         private static void Exercise4(int[] numbers) {
             //p175
-
+            foreach (var number in numbers.OrderBy(x => x).Take(3)) {
+                Console.WriteLine(number);
+            }
         }
 
         private static void Exercise5(int[] numbers) {
             //p174
-
+            var result = numbers.Distinct();
+            var count = result.Count(x => x > 10);
+            Console.WriteLine(count);
         }
     }
 }
