@@ -3,7 +3,7 @@
         static private Dictionary<string, string> prefOfficeDict = new Dictionary<string, string>();
 
         static void Main(string[] args) {
-            string? pref, prefCaptalLocation,str;
+            string? pref, prefCaptalLocation;
 
             Console.WriteLine("県庁所在地の登録【入力終了：Ctrl + 'Z'】");
 
@@ -18,8 +18,20 @@
                 Console.Write("県庁所在地：");
                 prefCaptalLocation = Console.ReadLine();
 
-                //県庁所在地登録処理
-                prefOfficeDict[pref] = prefCaptalLocation;
+                if (prefOfficeDict.ContainsKey(pref)) {
+                    Console.WriteLine("上書きしますか？(Y/N)");
+                    var str = Console.ReadLine();
+                    if (str == "Y") {
+                        //県庁所在地登録処理
+                        prefOfficeDict[pref] = prefCaptalLocation;
+                        Console.WriteLine();
+                    }
+                }
+                else {
+                    //県庁所在地登録処理
+                    prefOfficeDict[pref] = prefCaptalLocation;
+                    Console.WriteLine();
+                }
             }
 
             while (true) {
@@ -27,29 +39,19 @@
                 if (num == 9) break;
 
                 if (num == 1) {
-                    foreach (var result in prefOfficeDict) {
-                        Console.WriteLine($"{result.Key}の県庁所在地は{result.Value}です。");
-                    }
+                    allDisp();
                 }
                 else if (num == 2) {
-                    Console.Write("都道府県：");
-                    str = Console.ReadLine();
-                    var result = prefOfficeDict.Where(x => x.Key == str)
-                        .Select(x => x.Value).FirstOrDefault();
-
-                    if (result != null) {
-                        Console.WriteLine($"{str}の県庁所在地は{result}です。");
-                    }
-                    else {
-                        Console.WriteLine("不一致");
-                    }
+                    searchPrefCaptalLocation();
                 }
                 else {
                     Console.WriteLine("存在しないコマンドです。");
                 }
+                Console.WriteLine();
             }
         }
 
+        //メニュー表示
         private static int menuDisp() {
             Console.WriteLine("**** メニュー ****");
             Console.WriteLine("1：一覧表示");
@@ -60,5 +62,28 @@
             var num = int.Parse(str);
             return num;
         }
+
+        //一覧表示処理
+        private static void allDisp() {
+            foreach (var result in prefOfficeDict) {
+                Console.WriteLine($"{result.Key}の県庁所在地は{result.Value}です。");
+            }
+        }
+
+        //検索処理
+        private static void searchPrefCaptalLocation() {
+            Console.Write("都道府県：");
+            String? str = Console.ReadLine();
+            var result = prefOfficeDict.Where(x => x.Key == str)
+                .Select(x => x.Value).FirstOrDefault();
+
+            if (result != null) {
+                Console.WriteLine($"{str}の県庁所在地は{result}です。");
+            }
+            else {
+                Console.WriteLine("不一致");
+            }
+        }
+
     }
 }
