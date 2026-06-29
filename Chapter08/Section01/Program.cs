@@ -28,18 +28,20 @@
                 Console.WriteLine();
             }
 
+            Boolean endFlag = false;
             while (true) {
-                var num = menuDisp();
-                if (num == 9) break;
+                switch (menuDisp()) {
+                    case 1:
+                        allDisp();
+                        break;
 
-                if (num == 1) {
-                    allDisp();
-                }
-                else if (num == 2) {
-                    searchPrefCaptalLocation();
-                }
-                else {
-                    Console.WriteLine("存在しないコマンドです。");
+                    case 2:
+                        searchPrefCaptalLocation();
+                        break;
+
+                    default:
+                        endFlag = true;
+                        break;
                 }
                 Console.WriteLine();
             }
