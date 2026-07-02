@@ -15,7 +15,7 @@ namespace Exercise01 {
         private static void Exercise1(string text) {
             //コミットコメント（問題８．１.１完成）
             var dict = new Dictionary<char, int>();
-            foreach(char c in text.ToUpper()) {
+            foreach(var c in text.ToUpper()) {
                 if ('A' <= c && c <= 'Z') {
                     if (dict.ContainsKey(c)) {
                         dict[c]++;
@@ -33,7 +33,7 @@ namespace Exercise01 {
         private static void Exercise2(string text) {
             //コミットコメント（問題8.1.2完成）
             var dict = new SortedDictionary<char, int>();
-            foreach (char c in text.ToUpper()) {
+            foreach (var c in text.ToUpper()) {
                 if ('A' <= c && c <= 'Z') {
                     if (dict.ContainsKey(c)) {
                         dict[c]++;
