@@ -6,14 +6,25 @@ namespace Section01 {
             InitializeComponent();
         }
 
+        //nudDay
         private void button1_Click(object sender, EventArgs e) {
             DateTime dt1 = dtpDate.Value;
-            var culture = new CultureInfo("ja-JP");
-            culture.DateTimeFormat.Calendar = new JapaneseCalendar();
-            var strDate = dt1.ToString("ggyy”NMŒŽd“ú",culture);
-            tbOut.Text = strDate;
+            tbOut.Text = dt1.AddDays((double)nudDay.Value).ToString();
 
         }
 
+        private void button2_Click(object sender, EventArgs e) {
+            DateTime birth = dtpDate.Value; //
+            DateTime today = DateTime.Today; //
+
+            var days = today.Date - birth.Date;
+            tbOut2.Text = days.ToString();
+
+            int age = today.Year - birth.Year;
+            if(today < birth.AddYears(age)) {
+                age--;
+            }
+            tbOut.Text = $"{age}‰½Î";
+        }
     }
 }

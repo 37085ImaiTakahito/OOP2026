@@ -28,6 +28,9 @@
             tbOut = new TextBox();
             nudDay = new NumericUpDown();
             label1 = new Label();
+            dateTimePicker1 = new DateTimePicker();
+            button2 = new Button();
+            tbOut2 = new TextBox();
             ((System.ComponentModel.ISupportInitialize)nudDay).BeginInit();
             SuspendLayout();
             // 
@@ -50,10 +53,11 @@
             // 
             // tbOut
             // 
-            tbOut.Location = new Point(33, 229);
+            tbOut.Location = new Point(32, 235);
             tbOut.Name = "tbOut";
             tbOut.Size = new Size(199, 23);
             tbOut.TabIndex = 2;
+            tbOut.Text = "計算";
             // 
             // nudDay
             // 
@@ -71,11 +75,39 @@
             label1.TabIndex = 4;
             label1.Text = "日後";
             // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.Location = new Point(33, 178);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(200, 23);
+            dateTimePicker1.TabIndex = 5;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(276, 178);
+            button2.Name = "button2";
+            button2.Size = new Size(95, 33);
+            button2.TabIndex = 6;
+            button2.Text = "計算";
+            button2.TextAlign = ContentAlignment.MiddleRight;
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
+            // tbOut2
+            // 
+            tbOut2.Location = new Point(32, 277);
+            tbOut2.Name = "tbOut2";
+            tbOut2.Size = new Size(210, 23);
+            tbOut2.TabIndex = 7;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(tbOut2);
+            Controls.Add(button2);
+            Controls.Add(dateTimePicker1);
             Controls.Add(label1);
             Controls.Add(nudDay);
             Controls.Add(tbOut);
@@ -95,5 +127,8 @@
         private TextBox tbOut;
         private NumericUpDown nudDay;
         private Label label1;
+        private DateTimePicker dateTimePicker1;
+        private Button button2;
+        private TextBox tbOut2;
     }
 }
