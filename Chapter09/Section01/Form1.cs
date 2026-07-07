@@ -17,14 +17,20 @@ namespace Section01 {
             DateTime birth = dtpDate.Value; //
             DateTime today = DateTime.Today; //
 
-            int age = today.Year - birth.Year;
-            if(today < birth.AddYears(age)) {
-                age--;
-            }
+            var age = GetAge(birth, today);
             tbOut.Text = $"あなたは{age}歳";
 
             TimeSpan ts = today.Date - birth.Date;
             tbOut2.Text = $"生まれてから{ts.Days}日目です。";
+        }
+
+        //年齢を求めるメソッド
+        static int GetAge(DateTime birthday,DateTime targetDay) {
+            int age = targetDay.Year - birthday.Year;
+            if (targetDay < birthday.AddYears(age)) {
+                age--;
+            }
+            return age;
         }
     }
 }
