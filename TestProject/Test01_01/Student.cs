@@ -6,6 +6,5 @@
         public required string Subject { get; init; } = string.Empty;
         //点数
         public int Score { get; set; } 
-
     }
 }
