@@ -17,14 +17,14 @@ namespace Section01 {
             DateTime birth = dtpDate.Value; //
             DateTime today = DateTime.Today; //
 
-            var days = today.Date - birth.Date;
-            tbOut2.Text = days.ToString();
-
             int age = today.Year - birth.Year;
             if(today < birth.AddYears(age)) {
                 age--;
             }
-            tbOut.Text = $"{age}‰½Î";
+            tbOut.Text = $"‚ ‚È‚½‚Í{age}Î";
+
+            TimeSpan ts = today.Date - birth.Date;
+            tbOut2.Text = $"¶‚Ü‚ê‚Ä‚©‚ç{ts.Days}“ú–Ú‚Å‚·B";
         }
     }
 }
