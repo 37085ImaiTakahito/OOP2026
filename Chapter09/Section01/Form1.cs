@@ -10,18 +10,27 @@ namespace Section01 {
         private void button1_Click(object sender, EventArgs e) {
             DateTime dt1 = dtpDate.Value;
             tbOut.Text = dt1.AddDays((double)nudDay.Value).ToString();
-
         }
 
         private void button2_Click(object sender, EventArgs e) {
-            DateTime birth = dtpDate.Value; //
-            DateTime today = DateTime.Today; //
+            DateTime birth = dtpDate.Value; 
+            DateTime today = DateTime.Now; 
+            
+            tbOut.Text = $"あなたは{GetAge(birth, today)}歳";
 
-            var age = GetAge(birth, today);
-            tbOut.Text = $"あなたは{age}歳";
+            TimeSpan ts = today - birth;
+            tbOut2.Text = $"生まれてから{ts.TotalHours}日目です。";
 
-            TimeSpan ts = today.Date - birth.Date;
-            tbOut2.Text = $"生まれてから{ts.Days}日目です。";
+            var week = (birth.Day - 1) / 7 + 1;
+            tbOut3.Text = $"生まれた{birth.Month}月{birth.Day}日は" +
+                                $"第{week}週です。";
+
+            var culture = new CultureInfo("ja-JP");
+            culture.DateTimeFormat.Calendar = new JapaneseCalendar();
+            var dayOfWeek = culture.DateTimeFormat.GetDayName(birth.DayOfWeek);
+            tbOut4.Text = $"生まれた{birth.Month}月{birth.Day}日は" +
+                                $"第{week}週の{dayOfWeek}です。";
+
         }
 
         //年齢を求めるメソッド
@@ -31,6 +40,12 @@ namespace Section01 {
                 age--;
             }
             return age;
+        }
+
+        static int NthWeek(DateTime date) {
+            var firstDay = new DateTime(date.Year, date.Month, 1);
+            var firstDayOfWeek = (int)(firstDay.DayOfWeek);
+            return (date.Day + firstDayOfWeek - 1) / 7 + 1;
         }
     }
 }

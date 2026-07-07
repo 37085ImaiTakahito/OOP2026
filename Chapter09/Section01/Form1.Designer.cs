@@ -31,6 +31,12 @@
             dateTimePicker1 = new DateTimePicker();
             button2 = new Button();
             tbOut2 = new TextBox();
+            tbOut3 = new TextBox();
+            label2 = new Label();
+            label3 = new Label();
+            label4 = new Label();
+            label5 = new Label();
+            tbOut4 = new TextBox();
             ((System.ComponentModel.ISupportInitialize)nudDay).BeginInit();
             SuspendLayout();
             // 
@@ -46,14 +52,14 @@
             // 
             // dtpDate
             // 
-            dtpDate.Location = new Point(32, 34);
+            dtpDate.Location = new Point(43, 181);
             dtpDate.Name = "dtpDate";
             dtpDate.Size = new Size(200, 23);
             dtpDate.TabIndex = 1;
             // 
             // tbOut
             // 
-            tbOut.Location = new Point(32, 235);
+            tbOut.Location = new Point(89, 230);
             tbOut.Name = "tbOut";
             tbOut.Size = new Size(199, 23);
             tbOut.TabIndex = 2;
@@ -77,7 +83,7 @@
             // 
             // dateTimePicker1
             // 
-            dateTimePicker1.Location = new Point(33, 178);
+            dateTimePicker1.Location = new Point(32, 27);
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.Size = new Size(200, 23);
             dateTimePicker1.TabIndex = 5;
@@ -95,16 +101,72 @@
             // 
             // tbOut2
             // 
-            tbOut2.Location = new Point(32, 277);
+            tbOut2.Location = new Point(89, 259);
             tbOut2.Name = "tbOut2";
             tbOut2.Size = new Size(210, 23);
             tbOut2.TabIndex = 7;
+            // 
+            // tbOut3
+            // 
+            tbOut3.Location = new Point(89, 288);
+            tbOut3.Name = "tbOut3";
+            tbOut3.Size = new Size(225, 23);
+            tbOut3.TabIndex = 8;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(19, 238);
+            label2.Name = "label2";
+            label2.Size = new Size(31, 15);
+            label2.TabIndex = 9;
+            label2.Text = "年齢";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(19, 267);
+            label3.Name = "label3";
+            label3.Size = new Size(55, 15);
+            label3.TabIndex = 10;
+            label3.Text = "経過日数";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(21, 297);
+            label4.Name = "label4";
+            label4.Size = new Size(24, 15);
+            label4.TabIndex = 11;
+            label4.Text = "メモ";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(57, 157);
+            label5.Name = "label5";
+            label5.Size = new Size(55, 15);
+            label5.TabIndex = 12;
+            label5.Text = "生年月日";
+            // 
+            // tbOut4
+            // 
+            tbOut4.Location = new Point(89, 317);
+            tbOut4.Name = "tbOut4";
+            tbOut4.Size = new Size(240, 23);
+            tbOut4.TabIndex = 13;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(tbOut4);
+            Controls.Add(label5);
+            Controls.Add(label4);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(tbOut3);
             Controls.Add(tbOut2);
             Controls.Add(button2);
             Controls.Add(dateTimePicker1);
@@ -130,5 +192,11 @@
         private DateTimePicker dateTimePicker1;
         private Button button2;
         private TextBox tbOut2;
+        private TextBox tbOut3;
+        private Label label2;
+        private Label label3;
+        private Label label4;
+        private Label label5;
+        private TextBox tbOut4;
     }
 }
