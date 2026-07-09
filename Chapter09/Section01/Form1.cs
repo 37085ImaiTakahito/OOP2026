@@ -13,24 +13,35 @@ namespace Section01 {
         }
 
         private void button2_Click(object sender, EventArgs e) {
-            DateTime birth = dtpDate.Value; 
+            DateTime birth = dtpDate.Value.Date; 
             DateTime today = DateTime.Now; 
             
             tbOut.Text = $"あなたは{GetAge(birth, today)}歳";
 
             TimeSpan ts = today - birth;
-            tbOut2.Text = $"生まれてから{ts.TotalHours}日目です。";
-
-            var week = (birth.Day - 1) / 7 + 1;
-            tbOut3.Text = $"生まれた{birth.Month}月{birth.Day}日は" +
-                                $"第{week}週です。";
+            tbOut2.Text = $"生まれてから{ts.Days}日目です。";
 
             var culture = new CultureInfo("ja-JP");
             culture.DateTimeFormat.Calendar = new JapaneseCalendar();
             var dayOfWeek = culture.DateTimeFormat.GetDayName(birth.DayOfWeek);
-            tbOut4.Text = $"生まれた{birth.Month}月{birth.Day}日は" +
-                                $"第{week}週の{dayOfWeek}です。";
+            tbOut3.Text = $"生まれた{birth.Month}月{birth.Day}日は" +
+                                $"第{NthWeek(birth)}週の{dayOfWeek}です。";
 
+            //今年の誕生日を作成
+            DateTime thisYearBirthday = new DateTime(today.Year, birth.Month, birth.Day);
+            //既に誕生日が過ぎたか？
+            if(thisYearBirthday < today) {
+                //来年の誕生日を作成
+                thisYearBirthday = thisYearBirthday.AddYears(1);
+            }
+
+            var span = thisYearBirthday - today;
+
+            if(span.Days == 0) {
+                tbOut4.Text = "誕生日は今日です";
+            }else {
+                tbOut4.Text = $"誕生日まであと{span.Days}日 です。";
+            }
         }
 
         //年齢を求めるメソッド
