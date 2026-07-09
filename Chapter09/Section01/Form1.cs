@@ -40,7 +40,7 @@ namespace Section01 {
             if(span.Days == 0) {
                 tbOut4.Text = "’a¶“ú‚Í¡“ú‚Å‚·";
             }else {
-                tbOut4.Text = $"’a¶“ú‚Ü‚Å‚ ‚Æ{span.Days}“ú ‚Å‚·B";
+                tbOut4.Text = $"’a¶“ú‚Ü‚Å‚ ‚Æ{span.Days}“ú‚Å‚·B";
             }
         }
 
