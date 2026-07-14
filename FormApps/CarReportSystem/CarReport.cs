@@ -7,13 +7,7 @@ using System.Threading.Tasks;
 namespace CarReportSystem {
     internal class CarReport {
         public enum MakerGroup {
-            なし,
-            トヨタ,
-            ニッサン,
-            ホンダ,
-            スバル,
-            輸入車,
-            その他,
+            なし,トヨタ,ニッサン,ホンダ,スバル,輸入車,その他,
         }
         [System.ComponentModel.DisplayName("日付")]
         public DateTime Date { get; set; }                  //日付
