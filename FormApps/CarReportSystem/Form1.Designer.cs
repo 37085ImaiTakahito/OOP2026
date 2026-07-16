@@ -61,6 +61,7 @@
             このアプリについてToolStripMenuItem = new ToolStripMenuItem();
             statusStrip1 = new StatusStrip();
             tsslbMessage = new ToolStripStatusLabel();
+            ofdPicFileOpen = new OpenFileDialog();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvRecords).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbPicture).BeginInit();
@@ -227,11 +228,14 @@
             // dgvRecords
             // 
             dgvRecords.AccessibleName = "";
+            dgvRecords.AllowUserToAddRows = false;
+            dgvRecords.AllowUserToDeleteRows = false;
             dgvRecords.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvRecords.Location = new Point(117, 431);
             dgvRecords.MultiSelect = false;
             dgvRecords.Name = "dgvRecords";
             dgvRecords.ReadOnly = true;
+            dgvRecords.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvRecords.Size = new Size(719, 292);
             dgvRecords.TabIndex = 4;
             // 
@@ -296,6 +300,7 @@
             btPicDelete.TabIndex = 6;
             btPicDelete.Text = "削除";
             btPicDelete.UseVisualStyleBackColor = false;
+            btPicDelete.Click += btPicDelete_Click;
             // 
             // btAddRecord
             // 
@@ -319,6 +324,7 @@
             btModifyRecord.TabIndex = 7;
             btModifyRecord.Text = "修正";
             btModifyRecord.UseVisualStyleBackColor = false;
+            btModifyRecord.Click += btModifyRecord_Click;
             // 
             // btDeleteRecord
             // 
@@ -330,6 +336,7 @@
             btDeleteRecord.TabIndex = 8;
             btDeleteRecord.Text = "削除";
             btDeleteRecord.UseVisualStyleBackColor = false;
+            btDeleteRecord.Click += btDeleteRecord_Click;
             // 
             // pbPicture
             // 
@@ -359,35 +366,35 @@
             // 開くToolStripMenuItem
             // 
             開くToolStripMenuItem.Name = "開くToolStripMenuItem";
-            開くToolStripMenuItem.Size = new Size(180, 22);
+            開くToolStripMenuItem.Size = new Size(163, 22);
             開くToolStripMenuItem.Text = "開く...";
             // 
             // 保存ToolStripMenuItem
             // 
             保存ToolStripMenuItem.Name = "保存ToolStripMenuItem";
-            保存ToolStripMenuItem.Size = new Size(180, 22);
+            保存ToolStripMenuItem.Size = new Size(163, 22);
             保存ToolStripMenuItem.Text = "保存...";
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(177, 6);
+            toolStripSeparator1.Size = new Size(160, 6);
             // 
             // 色設定ToolStripMenuItem
             // 
             色設定ToolStripMenuItem.Name = "色設定ToolStripMenuItem";
-            色設定ToolStripMenuItem.Size = new Size(180, 22);
+            色設定ToolStripMenuItem.Size = new Size(163, 22);
             色設定ToolStripMenuItem.Text = "色設定...";
             // 
             // toolStripSeparator2
             // 
             toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new Size(177, 6);
+            toolStripSeparator2.Size = new Size(160, 6);
             // 
             // 終了ToolStripMenuItem
             // 
             終了ToolStripMenuItem.Name = "終了ToolStripMenuItem";
-            終了ToolStripMenuItem.Size = new Size(180, 22);
+            終了ToolStripMenuItem.Size = new Size(163, 22);
             終了ToolStripMenuItem.Text = "終了(X)     Alt+F4";
             // 
             // ヘルプHToolStripMenuItem
@@ -409,6 +416,7 @@
             statusStrip1.Location = new Point(0, 721);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Size = new Size(916, 22);
+            statusStrip1.SizingGrip = false;
             statusStrip1.TabIndex = 11;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -417,6 +425,10 @@
             tsslbMessage.Name = "tsslbMessage";
             tsslbMessage.Size = new Size(118, 17);
             tsslbMessage.Text = "toolStripStatusLabel1";
+            // 
+            // ofdPicFileOpen
+            // 
+            ofdPicFileOpen.FileName = "openFileDialog1";
             // 
             // Form1
             // 
@@ -445,9 +457,11 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(menuStrip1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             MainMenuStrip = menuStrip1;
             Name = "Form1";
             Text = "試乗レポート管理システム";
+            Load += Form1_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvRecords).EndInit();
@@ -500,5 +514,6 @@
         private ToolStripMenuItem このアプリについてToolStripMenuItem;
         private StatusStrip statusStrip1;
         private ToolStripStatusLabel tsslbMessage;
+        private OpenFileDialog ofdPicFileOpen;
     }
 }
