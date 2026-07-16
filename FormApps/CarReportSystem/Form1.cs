@@ -49,7 +49,6 @@ namespace CarReportSystem {
                 return MakerGroup.ƒXƒoƒ‹;
             if (rbYunyuu.Checked)
                 return MakerGroup.—A“üÔ;
-
             return MakerGroup.‚»‚Ì‘¼;
         }
 
