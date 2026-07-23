@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using System.Diagnostics.Metrics;
 using System.Windows.Forms;
+using System.Xml;
 using static CarReportSystem.CarReport;
 
 namespace CarReportSystem {
@@ -8,6 +9,9 @@ namespace CarReportSystem {
 
         //カーレポート管理用リスト
         BindingList<CarReport> listCarReports = new BindingList<CarReport>();
+
+        //設定クラスのオブジェクトを生成
+        Settings settings = new Settings();
 
         public Form1() {
             InitializeComponent();
@@ -196,5 +200,16 @@ namespace CarReportSystem {
                 BackColor = cdColor.Color;
             }
         }
+
+        //フォームが閉じたら呼ばれるイベントハンドラ
+        //private void Form1_FromClosed(object sender,FromClosedEventArgs e) {
+            //設定ファイルへ色情報を保存する処理（）
+            //p284以降を参考にする（ファイル名：setting.xml）
+
+        //   using (var winter = XmlWriter.Create("setting.xml")) {
+        //        var serialzar = new XmlSerializer(settings.GetType());
+        //        serialzar.Se
+        //    }
+        //}
     }
 }
