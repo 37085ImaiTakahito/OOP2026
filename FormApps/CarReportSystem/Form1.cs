@@ -42,7 +42,7 @@ namespace CarReportSystem {
             //入力履歴を登録
             SetCbAuthor(cbAuthor.Text);
             SetCbCarName(cbCarName.Text);
-
+            dgvRecords.CurrentRow.Selected = false; //セルの選択を解除
             ImputItemsAllClear();　//データグリッドビューを更新したら呼ぶメソッド
         }
 
@@ -77,6 +77,8 @@ namespace CarReportSystem {
             cbCarName.Text = string.Empty;
             tbReport.Text = string.Empty;
             pbPicture.Image = null;
+
+            dgvRecords.CurrentRow.Selected = false; //セルの選択を解除
         }
 
         private void dgvRecords_Click(object sender, EventArgs e) {
@@ -162,11 +164,8 @@ namespace CarReportSystem {
             listCarReports[dgvRecords.CurrentRow.Index].Report = tbReport.Text;
             listCarReports[dgvRecords.CurrentRow.Index].Picture = pbPicture.Image;
 
-
-
             dgvRecords.Refresh();       //データグリッドビューの更新
         }
-
 
     }
 }

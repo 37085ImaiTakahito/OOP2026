@@ -461,7 +461,7 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MainMenuStrip = menuStrip1;
             Name = "Form1";
-            Text = "試乗レポート管理システム";
+            Text = "++++++++++++++++++++++++++++++++++++++++++++++++++++++";
             Load += Form1_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
