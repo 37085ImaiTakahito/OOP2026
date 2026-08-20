@@ -33,11 +33,12 @@ namespace CarReportSystem {
                         BackColor = Color.FromArgb(setting.MainFromBackColor);
                     }
                 }
-                catch(Exception ex) {
+                catch (Exception ex) {
                     tsslbMessage.Text = "設定ファイル読み込みエラー";
                     MessageBox.Show(ex.Message);//←より具体的なエラーを出力
                 }
-            }else {
+            }
+            else {
                 tsslbMessage.Text = "設定ファイルがありません";
             }
 
@@ -233,6 +234,25 @@ namespace CarReportSystem {
                 var serialzar = new XmlSerializer(settings.GetType());
                 serialzar.Serialize(writer, settings);
             }
+        }
+
+        private void 保存ToolStripMenuItem_Click(object sender, EventArgs e) {
+            reportSaveFile();
+        }
+
+        //ファイルセーブ処理
+        private void reportSaveFile() {
+            //if(sfdReportFileSave.ShowDialog() == DialogResult.OK)
+        }
+
+        //ファイルオープン処理
+        private void reportOpenFile() {
+
+        }
+
+
+        private void saveFileDialog1_FileOk(object sender, CancelEventArgs e) {
+
         }
     }
 }
