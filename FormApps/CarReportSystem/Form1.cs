@@ -178,7 +178,7 @@ namespace CarReportSystem {
         }
 
         private void btModifyRecord_Click(object sender, EventArgs e) {
-            　
+
             if (dgvRecords.SelectedRows.Count == 0) {
                 tsslbMessage.Text = "修正するレポートを選択してください";
                 return;
