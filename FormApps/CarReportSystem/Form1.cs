@@ -27,9 +27,12 @@ namespace CarReportSystem {
                     //p286以降を参考(ファイル名：setting.xml)
                     using (var reader = XmlReader.Create("setting.xml")) {
                         var serializer = new XmlSerializer(typeof(Settings));
-                        var setting = serializer.Deserialize(reader) as Settings;
-                        //背景色設定
-                        BackColor = Color.FromArgb(setting.MainFromBackColor);
+
+                        if(serializer.Deserialize(reader) is Settings loadedSettings) {
+                            settings = loadedSettings;
+                            //背景色設定
+                            BackColor = Color.FromArgb(settings.MainFromBackColor);
+                        }
                     }
                 }
                 catch (Exception ex) {
@@ -155,17 +158,19 @@ namespace CarReportSystem {
         }
 
         private void btDeleteRecord_Click(object sender, EventArgs e) {
-
             if ((dgvRecords.CurrentRow is null)
                 || (!dgvRecords.CurrentRow.Selected)) return;
 
-            //選択されているインデックスを取得
             //削除したいインデックスを指定してリストから削除
-            listCarReports.RemoveAt(dgvRecords.CurrentRow.Index);
+            if(dgvRecords.CurrentRow?.DataBoundItem is not CarReport carReport) {
+                tsslbMessage.Text = "削除するレポートを選択してください。";
+                return;
+            }
+            listCarReports.Remove(carReport);
 
-            InputItemsUpdate();
+            InputItemsUpdate(); //データグリッドビューを更新したら呼ぶメソッド
         }
-
+        //データグリッドビューを更新したら呼ぶメソッド
         private void InputItemsUpdate() {
             if (dgvRecords.CurrentRow is null
                 || !dgvRecords.CurrentRow.Selected)
@@ -182,6 +187,11 @@ namespace CarReportSystem {
             if (String.IsNullOrWhiteSpace(cbAuthor.Text)
                 || String.IsNullOrWhiteSpace(cbCarName.Text)) {
                 tsslbMessage.Text = "記録者、または車名が未入力です";
+                return;
+            }
+
+            if (dgvRecords.CurrentRow?.DataBoundItem is not CarReport carReport) {
+                tsslbMessage.Text = "修正するレポートを選択してください。";
                 return;
             }
 
