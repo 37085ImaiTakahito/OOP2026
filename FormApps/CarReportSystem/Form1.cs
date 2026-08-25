@@ -1,7 +1,5 @@
 using System.ComponentModel;
-using System.Diagnostics.Metrics;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Serialization;
 using static CarReportSystem.CarReport;
@@ -169,7 +167,8 @@ namespace CarReportSystem {
         }
 
         private void InputItemsUpdate() {
-            if (!dgvRecords.CurrentRow.Selected)
+            if (dgvRecords.CurrentRow is null
+                || !dgvRecords.CurrentRow.Selected)
                 InputItemsAllClear();
         }
 
