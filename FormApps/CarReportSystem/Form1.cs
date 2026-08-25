@@ -94,6 +94,11 @@ namespace CarReportSystem {
                 pbPicture.Image = Image.FromFile(ofdPicFileOpen.FileName);
             }
         }
+        private void btOpenPicture_Click_1(object sender, EventArgs e) {
+            if (ofdPicFileOpen.ShowDialog() == DialogResult.OK) {
+                pbPicture.Image = Image.FromFile(ofdPicFileOpen.FileName);
+            }
+        }
 
         private void btNewInput_Click(object sender, EventArgs e) {
             InputItemsAllClear();
@@ -137,13 +142,13 @@ namespace CarReportSystem {
         //‹L˜^Ò‚Ì“ü—Í—š—ğ‚ğƒRƒ“ƒ{ƒ{ƒbƒNƒX‚Ö“o˜^id•¡‚È‚µj
         private void SetCbAuthor(string author) {
             //–¢“o˜^‚È‚ç“o˜^y“o˜^Ï‚İ‚È‚ç‰½‚à‚µ‚È‚¢z
-            if (!cbAuthor.Items.Contains(author)) 
+            if (!cbAuthor.Items.Contains(author))
                 cbAuthor.Items.Add(author);
         }
         //Ô–¼‚Ì“ü—Í—š—ğ‚ğƒRƒ“ƒ{ƒ{ƒbƒNƒX‚Ö“o˜^id•¡‚È‚µj
         private void SetCbCarName(string carName) {
             //–¢“o˜^‚È‚ç“o˜^y“o˜^Ï‚İ‚È‚ç‰½‚à‚µ‚È‚¢z
-            if (!cbCarName.Items.Contains(carName)) 
+            if (!cbCarName.Items.Contains(carName))
                 cbCarName.Items.Add(carName);
         }
 
@@ -286,7 +291,7 @@ namespace CarReportSystem {
                     cbCarName.Items.Clear();
 
                     //ƒRƒ“ƒ{ƒ{ƒbƒNƒX‚Ì—š—ğ‚ğÄ“o˜^
-                    foreach(var report in listCarReports) {
+                    foreach (var report in listCarReports) {
                         SetCbAuthor(report.Author);
                         SetCbCarName(report.CarName);
                     }
@@ -299,5 +304,9 @@ namespace CarReportSystem {
             }
         }
 
+        private void cbAuthor_SelectedIndexChanged(object sender, EventArgs e) {
+
+        }
+        
     }
 }

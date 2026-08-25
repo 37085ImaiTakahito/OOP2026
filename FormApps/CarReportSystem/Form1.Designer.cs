@@ -198,6 +198,7 @@
             cbAuthor.Name = "cbAuthor";
             cbAuthor.Size = new Size(295, 40);
             cbAuthor.TabIndex = 3;
+            cbAuthor.SelectedIndexChanged += cbAuthor_SelectedIndexChanged;
             // 
             // label4
             // 
@@ -292,6 +293,7 @@
             btOpenPicture.TabIndex = 6;
             btOpenPicture.Text = "開く...";
             btOpenPicture.UseVisualStyleBackColor = false;
+            btOpenPicture.Click += btOpenPicture_Click_1;
             // 
             // btPicDelete
             // 
