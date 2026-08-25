@@ -11,7 +11,7 @@ namespace CarReportSystem {
         BindingList<CarReport> listCarReports = new BindingList<CarReport>();
 
         //設定クラスのオブジェクトを生成
-        Settings settings = new Settings();
+        //Settings settings = Settings.Instance;
 
         public Form1() {
             InitializeComponent();
@@ -29,9 +29,9 @@ namespace CarReportSystem {
                         var serializer = new XmlSerializer(typeof(Settings));
 
                         if(serializer.Deserialize(reader) is Settings loadedSettings) {
-                            settings = loadedSettings;
+                            //settings = loadedSettings;
                             //背景色設定
-                            BackColor = Color.FromArgb(settings.MainFromBackColor);
+                            BackColor = Color.FromArgb(Settings.Instance.MainFromBackColor);
                         }
                     }
                 }
@@ -189,7 +189,7 @@ namespace CarReportSystem {
                 tsslbMessage.Text = "記録者、または車名が未入力です";
                 return;
             }
-
+                                
             if (dgvRecords.CurrentRow?.DataBoundItem is not CarReport carReport) {
                 tsslbMessage.Text = "修正するレポートを選択してください。";
                 return;
@@ -235,7 +235,7 @@ namespace CarReportSystem {
             if (cdColor.ShowDialog() == DialogResult.OK) {
                 BackColor = cdColor.Color;
                 //変更された色の情報を保存
-                settings.MainFromBackColor = cdColor.Color.ToArgb();
+                Settings.Instance.MainFromBackColor = cdColor.Color.ToArgb();
             }
         }
 
@@ -245,8 +245,8 @@ namespace CarReportSystem {
             //p284以降を参考にする（ファイル名：setting.xml）
 
             using (var writer = XmlWriter.Create("setting.xml")) {
-                var serialzar = new XmlSerializer(settings.GetType());
-                serialzar.Serialize(writer, settings);
+                var serialzar = new XmlSerializer(Settings.Instance.GetType());
+                serialzar.Serialize(writer, Settings.Instance);
             }
         }
 
