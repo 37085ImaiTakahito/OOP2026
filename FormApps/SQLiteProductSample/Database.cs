@@ -42,6 +42,8 @@ public static class Database
                 Price   INTEGER NOT NULL CHECK (Price >= 0)
             );
             """;
+
+        //Œ‹‰Ês‚ğ•Ô‚³‚È‚¢SQL‚ğÀs‚·‚é
         command.ExecuteNonQuery();
     }
 }
