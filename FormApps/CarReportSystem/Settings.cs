@@ -10,7 +10,7 @@ namespace CarReportSystem {
         private static readonly Settings _instance = new Settings();
 
         //メイン画面に設定した色情報
-        public int MainFromBackColor { get; set; }
+        public int MainFormBackColor { get; set; }
         = SystemColors.Control.ToArgb();
 
         //唯一のオブジェクトを取得する
@@ -30,14 +30,14 @@ namespace CarReportSystem {
             var serializer = new XmlSerializer(typeof(SettingsDate));
 
             if(serializer.Deserialize(reader) is SettingsDate date) {
-                MainFromBackColor = date.MainFromBackColor;
+                MainFormBackColor = date.MainFromBackColor;
             }
         }
         
         //設定ファイルを保存
         public void Save() {
             var date = new SettingsDate {
-                MainFromBackColor = MainFromBackColor
+                MainFromBackColor = MainFormBackColor
             };
 
             using var writer = XmlWriter.Create(FileName);

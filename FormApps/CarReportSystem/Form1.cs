@@ -22,7 +22,7 @@ namespace CarReportSystem {
             //設定ファイルを読み込み背景色を設定する（逆シリアル化)
             try {
                 Settings.Instance.Load();
-                BackColor = Color.FromArgb(Settings.Instance.MainFromBackColor);
+                BackColor = Color.FromArgb(Settings.Instance.MainFormBackColor);
             }
             catch (Exception ex) {
                 tsslbMessage.Text = "設定ファイル読み込みエラー";
@@ -242,7 +242,7 @@ namespace CarReportSystem {
             if (cdColor.ShowDialog() == DialogResult.OK) {
                 BackColor = cdColor.Color;
                 //変更された色の情報を保存
-                Settings.Instance.MainFromBackColor = cdColor.Color.ToArgb();
+                Settings.Instance.MainFormBackColor = cdColor.Color.ToArgb();
             }
         }
 
