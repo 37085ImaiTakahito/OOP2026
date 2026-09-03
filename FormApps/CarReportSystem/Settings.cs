@@ -30,14 +30,14 @@ namespace CarReportSystem {
             var serializer = new XmlSerializer(typeof(SettingsDate));
 
             if(serializer.Deserialize(reader) is SettingsDate date) {
-                MainFormBackColor = date.MainFromBackColor;
+                MainFormBackColor = date.MainFormBackColor;
             }
         }
         
         //設定ファイルを保存
         public void Save() {
             var date = new SettingsDate {
-                MainFromBackColor = MainFormBackColor
+                MainFormBackColor = MainFormBackColor
             };
 
             using var writer = XmlWriter.Create(FileName);
@@ -49,6 +49,6 @@ namespace CarReportSystem {
 
     //XML保存用のクラス
     public class SettingsDate {
-        public int MainFromBackColor { get; set; }
+        public int MainFormBackColor { get; set; }
     }
 }
