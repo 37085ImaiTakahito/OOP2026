@@ -52,7 +52,7 @@ namespace CarReportSystem {
                 //    tsslbMessage.Text = "設定ファイルがありません";
                 //}
             }
-
+         
         //追加ボタンイベントハンドラ
         private void btAddRecord_Click(object sender, EventArgs e) {
             tsslbMessage.Text = String.Empty; //メッセージ領域のクリア            
