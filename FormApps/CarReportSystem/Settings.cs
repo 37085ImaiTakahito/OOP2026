@@ -51,4 +51,7 @@ namespace CarReportSystem {
     public class SettingsDate {
         public int MainFormBackColor { get; set; }
     }
+
+
+
 }

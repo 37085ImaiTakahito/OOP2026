@@ -1,5 +1,4 @@
 ﻿namespace CarReportSystem {
-    [Serializable]
     internal class CarReport {
         //列挙型
         public enum MakerGroup {
@@ -17,5 +16,9 @@
         public string Report { get; set; } = string.Empty;  //レポート
         [System.ComponentModel.DisplayName("画像")]
         public Image? Picture { get; set; }                 //画像
+
+        public int Id { get; set; }
+        
+
     }
 }
