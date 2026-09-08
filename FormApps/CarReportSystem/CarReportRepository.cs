@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static CarReportSystem.CarReport;
 
 //
 //
@@ -24,8 +25,8 @@ namespace CarReportSystem {
             command.CommandText =
                 """
             SELECT 
-                Id,Date,Auther,Maker,CarName,Report,Picture
-            FROM CarReport
+                Id,Date,Author,Maker,CarName,Report,Picture
+            FROM CarReports
             ORDER BY Id;
             """;
 
@@ -52,7 +53,8 @@ namespace CarReportSystem {
 
         //商品を1件追加する。Create(INSERT)に相当する
         //戻り値として自動採番されたIdを返す
-        public int Add(string name, int price) {
+        public int Add(DateTime date,string author,MakerGroup maker, 
+                        string carName,string report, Image? picture) {
             //接続オブジェクトを生成する
             using var connection = Database.GetConnection();
 
@@ -64,15 +66,19 @@ namespace CarReportSystem {
 
             command.CommandText =
                 """
-            INSERT INTO Products (Name, Price)
-            VALUES ($name,$price);
+            INSERT INTO CarReports 
+            (Date, Author, Maker,CarName, Report, Picture)
+            VALUES ($date,$author,$maker,$carName,$report,$picture);
 
             SELECT last_insert_rowid();
             """;
 
-            command.Parameters.AddWithValue("$name", name);
-            command.Parameters.AddWithValue("$price", price);
-
+            command.Parameters.AddWithValue("$date",date.ToString("yyyy-MM-dd"));
+            command.Parameters.AddWithValue("$author", author);
+            command.Parameters.AddWithValue("$maker", maker);
+            command.Parameters.AddWithValue("$carName", carName);
+            command.Parameters.AddWithValue("$report", report);
+            command.Parameters.AddWithValue("$picture", ImageToBytes(picture));
 
             //一つの値を返すSQLを実行する
             var result = command.ExecuteScalar();
@@ -98,13 +104,13 @@ namespace CarReportSystem {
             WHERE Id = $id;
             """;
 
-            command.Parameters.AddWithValue("$date", report.Date);
+            command.Parameters.AddWithValue("$date",report.Date.ToString("yyyy-MM-dd"));
             command.Parameters.AddWithValue("$author", report.Author);
             command.Parameters.AddWithValue("$maker", report.Maker);
             command.Parameters.AddWithValue("$carName", report.CarName);
             command.Parameters.AddWithValue("$report", report.Report);
-            command.Parameters.AddWithValue("$picture", report.Picture);
-            command.Parameters.AddWithValue("id", report.Id);
+            command.Parameters.AddWithValue("$picture",ImageToBytes(report.Picture));
+            command.Parameters.AddWithValue("$id", report.Id);
 
             //更新件数が0なら対象が存在しない
             if (command.ExecuteNonQuery() == 0)
@@ -118,11 +124,11 @@ namespace CarReportSystem {
             using var command = connection.CreateCommand();
             command.CommandText =
                 """
-            DELETE FROM Products
+            DELETE FROM CarReports
             WHERE  Id = $id;
             """;
 
-            command.Parameters.AddWithValue("id", id);
+            command.Parameters.AddWithValue("$id", id);
             command.ExecuteNonQuery();
         }
 
@@ -132,6 +138,14 @@ namespace CarReportSystem {
             using var stream = new MemoryStream();
             image.Save(stream, image.RawFormat);
             return stream.ToArray();
+        }
+
+        private static Image? BytesToImage(byte[]? bytes) {
+            if (bytes is null || bytes.Length == 0)
+                return null;
+            using var stream = new MemoryStream(bytes);
+            using var image = Image.FromStream(stream);
+            return new Bitmap(image);
         }
     }
 }

@@ -34,14 +34,18 @@ namespace CarReportSystem {
             //SQLを実行するためのコマンドオブジェクトを作る
             using var command = connection.CreateCommand();
 
-            //Productテーブルを作るSQL
+            //テーブルを作るSQL
             //IF NOT EXISTSにより、既にテーブルがあってもエラーにならない
             command.CommandText =
                 """
-            CREATE TABLE IF NOT EXISTS Products(
+            CREATE TABLE IF NOT EXISTS CarReports(
                 Id      INTEGER PRIMARY KEY AUTOINCREMENT,
-                Name    TEXT NOT NULL,
-                Price   INTEGER NOT NULL CHECK (Price >= 0)
+                Date    TEXT    NOT NULL,
+                Author  TEXT    NOT NULL,
+                Maker   INTEGER NOT NULL,
+                CarName TEXT    NOT NULL,
+                Report  TEXT    NOT NULL,
+                Picture BLOB
             );
             """;
 
