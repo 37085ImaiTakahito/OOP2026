@@ -112,6 +112,7 @@ namespace CarReportSystem {
             InputItemsAllClear();
         }
 
+        //
         private void InputItemsAllClear() {
             dtpDate.Value = DateTime.Today;
             cbAuthor.Text = string.Empty;
