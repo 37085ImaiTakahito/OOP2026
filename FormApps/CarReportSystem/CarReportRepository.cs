@@ -26,7 +26,13 @@ namespace CarReportSystem {
             command.CommandText =
                 """
             SELECT 
-                Id,Date,Author,Maker,CarName,Report,Picture
+                Id,
+                Date,
+                Author,
+                Maker,
+                CarName,
+                Report,
+                Picture
             FROM CarReports
             ORDER BY Id;
             """;
@@ -150,7 +156,7 @@ namespace CarReportSystem {
         }
 
         private static void SetCommandParameters(CarReport carReport, SqliteCommand command) {
-            command.Parameters.AddWithValue("$date", carReport.Date.ToString("yyyy-MM-dd"));
+            command.Parameters.AddWithValue("$date", carReport.Date.ToString("yyyy-MM-dd",CultureInfo.InvariantCulture));
             command.Parameters.AddWithValue("$author", carReport.Author);
             command.Parameters.AddWithValue("$maker", carReport.Maker);
             command.Parameters.AddWithValue("$carName", carReport.CarName);

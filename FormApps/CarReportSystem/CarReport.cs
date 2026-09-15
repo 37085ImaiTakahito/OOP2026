@@ -4,6 +4,8 @@
         public enum MakerGroup {
             なし,トヨタ,ニッサン,ホンダ,スバル,輸入車,その他,
         }
+        [System.ComponentModel.DisplayName("id")]
+        public int Id { get; set; }                         //Id
         [System.ComponentModel.DisplayName("日付")]
         public DateTime Date { get; set; }                  //日付
         [System.ComponentModel.DisplayName("記録者")]
@@ -16,9 +18,5 @@
         public string Report { get; set; } = string.Empty;  //レポート
         [System.ComponentModel.DisplayName("画像")]
         public Image? Picture { get; set; }                 //画像
-
-        public int Id { get; set; }
-        
-
     }
 }

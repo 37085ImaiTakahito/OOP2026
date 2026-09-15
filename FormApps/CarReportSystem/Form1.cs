@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Security.Cryptography;
 using System.Xml;
 using System.Xml.Serialization;
 using static CarReportSystem.CarReport;
@@ -8,14 +9,16 @@ namespace CarReportSystem {
     public partial class Form1 : Form {
 
         //カーレポート管理用リスト
-        BindingList<CarReport> listCarReports = new BindingList<CarReport>();
+        BindingList<CarReport> _carreports = new();
+        //DBを操作するReoository
+        private readonly CarReportRepository _repository = new();
 
         //設定クラスのオブジェクトを生成
         //Settings settings = Settings.Instance;
 
         public Form1() {
             InitializeComponent();
-            dgvRecords.DataSource = listCarReports;
+            dgvRecords.DataSource = _carreports;
         }
 
         private void Form1_Load(object sender, EventArgs e) {
@@ -28,31 +31,31 @@ namespace CarReportSystem {
                 tsslbMessage.Text = "設定ファイル読み込みエラー";
                 MessageBox.Show(ex.Message);//←より具体的なエラーを出力
             }
-                //ファイルが実在するか？
-                //if (File.Exists("setting.xml")) {
-                //    try {
-                //        //p286以降を参考(ファイル名：setting.xml)
-                //        using (var reader = XmlReader.Create("setting.xml")) {
-                //            var serializer = new XmlSerializer(typeof(Settings));
-                //
-                //            if(serializer.Deserialize(reader) is Settings loadedSettings) {
-                //                //settings = loadedSettings;
-                //
-                //                //背景色設定
-                //                BackColor = Color.FromArgb(Settings.Instance.MainFromBackColor);
-                //            }
-                //        }
-                //    }
-                //    catch (Exception ex) {
-                //        tsslbMessage.Text = "設定ファイル読み込みエラー";
-                //        MessageBox.Show(ex.Message);//←より具体的なエラーを出力
-                //    }
-                //}
-                //else {
-                //    tsslbMessage.Text = "設定ファイルがありません";
-                //}
-            }
-         
+            //ファイルが実在するか？
+            //if (File.Exists("setting.xml")) {
+            //    try {
+            //        //p286以降を参考(ファイル名：setting.xml)
+            //        using (var reader = XmlReader.Create("setting.xml")) {
+            //            var serializer = new XmlSerializer(typeof(Settings));
+            //
+            //            if(serializer.Deserialize(reader) is Settings loadedSettings) {
+            //                //settings = loadedSettings;
+            //
+            //                //背景色設定
+            //                BackColor = Color.FromArgb(Settings.Instance.MainFromBackColor);
+            //            }
+            //        }
+            //    }
+            //    catch (Exception ex) {
+            //        tsslbMessage.Text = "設定ファイル読み込みエラー";
+            //        MessageBox.Show(ex.Message);//←より具体的なエラーを出力
+            //    }
+            //}
+            //else {
+            //    tsslbMessage.Text = "設定ファイルがありません";
+            //}
+        }
+
         //追加ボタンイベントハンドラ
         private void btAddRecord_Click(object sender, EventArgs e) {
             tsslbMessage.Text = String.Empty; //メッセージ領域のクリア            
@@ -73,11 +76,13 @@ namespace CarReportSystem {
                 Report = tbReport.Text,
                 Picture = pbPicture.Image,
             };
-            listCarReports.Add(carReport);
+
+            _repository.Add(carReport); //データベースへ書き出し
+            ReloadCarReports();
 
             //入力履歴を登録
-            SetCbAuthor(cbAuthor.Text);
-            SetCbCarName(cbCarName.Text);
+            //SetCbAuthor(cbAuthor.Text);
+            //SetCbCarName(cbCarName.Text);
 
             dgvRecords.ClearSelection(); //セルの選択を解除
             InputItemsAllClear();　//データグリッドビューを更新したら呼ぶメソッド
@@ -170,11 +175,13 @@ namespace CarReportSystem {
                 || (!dgvRecords.CurrentRow.Selected)) return;
 
             //削除したいインデックスを指定してリストから削除
-            if(dgvRecords.CurrentRow?.DataBoundItem is not CarReport carReport) {
+            if (dgvRecords.CurrentRow?.DataBoundItem is not CarReport carReport) {
                 tsslbMessage.Text = "削除するレポートを選択してください。";
                 return;
             }
-            listCarReports.Remove(carReport);
+            //_carreports.Remove(carReport);
+            _repository.Delete(carReport.Id);
+            ReloadCarReports();
 
             InputItemsUpdate(); //データグリッドビューを更新したら呼ぶメソッド
         }
@@ -197,19 +204,19 @@ namespace CarReportSystem {
                 tsslbMessage.Text = "記録者、または車名が未入力です";
                 return;
             }
-                                
+
             if (dgvRecords.CurrentRow?.DataBoundItem is not CarReport carReport) {
                 tsslbMessage.Text = "修正するレポートを選択してください。";
                 return;
             }
 
             //カーレポート管理用リストの該当する要素のデータを書き換える
-            listCarReports[dgvRecords.CurrentRow.Index].Date = dtpDate.Value;
-            listCarReports[dgvRecords.CurrentRow.Index].Author = cbAuthor.Text.Trim();
-            listCarReports[dgvRecords.CurrentRow.Index].Maker = GetRadioButtonMaker();
-            listCarReports[dgvRecords.CurrentRow.Index].CarName = cbCarName.Text.Trim();
-            listCarReports[dgvRecords.CurrentRow.Index].Report = tbReport.Text;
-            listCarReports[dgvRecords.CurrentRow.Index].Picture = pbPicture.Image;
+            _carreports[dgvRecords.CurrentRow.Index].Date = dtpDate.Value;
+            _carreports[dgvRecords.CurrentRow.Index].Author = cbAuthor.Text.Trim();
+            _carreports[dgvRecords.CurrentRow.Index].Maker = GetRadioButtonMaker();
+            _carreports[dgvRecords.CurrentRow.Index].CarName = cbCarName.Text.Trim();
+            _carreports[dgvRecords.CurrentRow.Index].Report = tbReport.Text;
+            _carreports[dgvRecords.CurrentRow.Index].Picture = pbPicture.Image;
 
             SetCbAuthor(cbAuthor.Text.Trim());
             SetCbCarName(cbCarName.Text.Trim());
@@ -231,6 +238,22 @@ namespace CarReportSystem {
 
             InputItemsUpdate(); //データグリッドビューを更新したら呼ぶメソッド
         }
+
+        private void ReloadCarReports() {
+            _carreports.Clear();
+
+            cbAuthor.Items.Clear(); //コンボボックスの履歴を削除
+            cbCarName.Items.Clear();
+
+            foreach (var carReport in _repository.GetAll()) {
+                _carreports.Add(carReport);
+                //コンボボックスに入力履歴を登録
+                SetCbAuthor(carReport.Author);
+                SetCbCarName(carReport.CarName);
+            }
+            dgvRecords.ClearSelection();
+        }
+
         private void saveFileDialog1_FileOk(object sender, CancelEventArgs e) {
 
         }
@@ -272,7 +295,7 @@ namespace CarReportSystem {
 #pragma warning restore SYSLIB0011
                     using (FileStream fs = File.Open(sfdReportFileSave.FileName,
                         FileMode.Create)) {
-                        bf.Serialize(fs, listCarReports);
+                        bf.Serialize(fs, _carreports);
                     }
                 }
                 catch (Exception ex) {
@@ -300,15 +323,15 @@ namespace CarReportSystem {
                         FileAccess.Read //アクセス
                         )) {
 
-                        listCarReports = (BindingList<CarReport>)bf.Deserialize(fs);
-                        dgvRecords.DataSource = listCarReports;
+                        _carreports = (BindingList<CarReport>)bf.Deserialize(fs);
+                        dgvRecords.DataSource = _carreports;
                     }
                     //コンボボックスの履歴をすべて消す
                     cbAuthor.Items.Clear();
                     cbCarName.Items.Clear();
 
                     //コンボボックスの履歴を再登録
-                    foreach (var report in listCarReports) {
+                    foreach (var report in _carreports) {
                         SetCbAuthor(report.Author);
                         SetCbCarName(report.CarName);
                     }
@@ -324,6 +347,10 @@ namespace CarReportSystem {
         private void cbAuthor_SelectedIndexChanged(object sender, EventArgs e) {
 
         }
-        
+
+        private void このアプリについてToolStripMenuItem_Click(object sender, EventArgs e) {
+            var fm = new Form();
+            fm.ShowDialog();
+        }
     }
 }
