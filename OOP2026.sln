@@ -146,6 +146,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarReportSystem", "FormApps
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLiteProductSample", "FormApps\SQLiteProductSample\SQLiteProductSample.csproj", "{84B66FDD-5552-D43E-B2CB-9DC2A25E5F4C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AspNetCoreMVC", "AspNetCoreMVC", "{337A50E5-285A-4B82-BDB2-865397B41E4B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcBasicSample", "AspNetCoreMVC\MvcBasicSample\MvcBasicSample.csproj", "{03E3CF3B-C2B7-47A8-80DC-C7B40F27A697}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -316,6 +320,10 @@ Global
 		{84B66FDD-5552-D43E-B2CB-9DC2A25E5F4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84B66FDD-5552-D43E-B2CB-9DC2A25E5F4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84B66FDD-5552-D43E-B2CB-9DC2A25E5F4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03E3CF3B-C2B7-47A8-80DC-C7B40F27A697}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03E3CF3B-C2B7-47A8-80DC-C7B40F27A697}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03E3CF3B-C2B7-47A8-80DC-C7B40F27A697}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03E3CF3B-C2B7-47A8-80DC-C7B40F27A697}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -379,6 +387,7 @@ Global
 		{795311D5-AA88-4071-9B3E-55B7204F4028} = {5E8738B7-162F-4445-B17B-FA470C40D75B}
 		{66684888-5560-4CA2-97E9-596D22AC8B1E} = {D7FE1123-D6EC-4134-9EDF-E09477171A01}
 		{84B66FDD-5552-D43E-B2CB-9DC2A25E5F4C} = {D7FE1123-D6EC-4134-9EDF-E09477171A01}
+		{03E3CF3B-C2B7-47A8-80DC-C7B40F27A697} = {337A50E5-285A-4B82-BDB2-865397B41E4B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A6DA9312-344C-4D18-B8C0-D563311D08F4}
