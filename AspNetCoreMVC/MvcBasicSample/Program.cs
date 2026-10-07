@@ -1,12 +1,12 @@
-using Microsoft.EntityFrameworkCore;
-using MvcBasicSample.Data;
+using Microsoft.EntityFrameworkCore; //UseSqlServer を使用
+using MvcBasicSample.Data; //AppDbContext を使用
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-//*****
+//***** コピペで追加
 // DefaultConnectionという名前の接続文字列を取得する 
 var connectionString = builder.Configuration
     .GetConnectionString("DefaultConnection")
