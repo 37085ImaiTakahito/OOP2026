@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,19 +21,26 @@ namespace Exercise01_WPF {
             InitializeComponent();
         }
 
-        private async Task Button_Click(object sender, RoutedEventArgs e) {
+        private async void Button_Click(object sender, RoutedEventArgs e) {
             var ofd = new OpenFileDialog();
             if(ofd.ShowDialog() is true) {
                 TextArea.Text = await TextReaderSample.ReadTextAsync(ofd.FileName);
             }
         }
     }
-}
 
-static class TextReaderSample {
-    public static async Task<string> ReadTextAsync(string fileName) {
-        var sb = new StringBuilder();
+    //非同期のファイル読み込み処理
+    static class TextReaderSample {
+        public static async Task<string> ReadTextAsync(string fileName) {
+            var sb = new StringBuilder();
 
-        return sb.ToString();
+            //ここに非同期でテキストファイルを読み込む処理を記述する
+            var sr = new StreamReader(fileName);
+            while (!sr.EndOfStream) {
+                var line = await sr.ReadLineAsync();
+                sb.AppendLine(line);
+            }
+            return sb.ToString();
+        }
     }
 }
