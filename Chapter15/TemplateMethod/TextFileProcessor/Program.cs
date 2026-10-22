@@ -1,6 +1,6 @@
 ﻿namespace TextFileProcessor;
-public abstract class TextProcesser {
-    public static void Run<T>(String fileName) where T : TextProcesser, new() {
+public abstract class TextProcessor {
+    public static void Run<T>(string fileName) where T : TextProcessor, new() {
         var self = new T();
         self.Process(fileName);
     }
@@ -8,7 +8,7 @@ public abstract class TextProcesser {
     private void Process(string fileName) {
         Initialize(fileName);
         var lines = File.ReadLines(fileName);
-        foreach(var line in lines) {
+        foreach (var line in lines) {
             Execute(line);
         }
         Terminate();
