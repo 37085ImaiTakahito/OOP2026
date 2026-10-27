@@ -37,3 +37,13 @@ public class YardConverter : ConverterBase {
     protected override double Ratio => 0.9144;
     public override string UnitName => "ヤード";
 }
+
+public class MeterConverter : ConverterBase {
+    public override bool IsMyUnit(string name) =>
+        name.Equals("meter", StringComparison.CurrentCultureIgnoreCase) || name == UnitName;
+
+    protected override double Ratio => 1;
+    public override string UnitName => "メートル";
+}
+
+
