@@ -17,7 +17,9 @@ namespace Exercise03 {
             _service.Initialize(fileName);
             var lines = File.ReadLines(fileName);
             foreach (var line in lines) {
-                _service.Execute(line);
+                if (!_service.Execute(line)) {
+                    break;
+                }
             }
             _service.Terminate();
         }
