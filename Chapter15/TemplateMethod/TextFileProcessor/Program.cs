@@ -1,7 +1,7 @@
 ﻿namespace TextFileProcessor;
 
-public abstract class TextProcessor {
-    public static void Run<T>(string fileName) where T : TextProcessor, new() {
+public abstract class TextFileProcessor {
+    public static void Run<T>(string fileName) where T : TextFileProcessor, new() {
         var self = new T();
         self.Process(fileName);
     }

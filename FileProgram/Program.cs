@@ -2,10 +2,10 @@
 
 
 string path = @"C:\Users\infosys\source\repos\OOP2026\Chapter14\Section04\Program.cs";
-TextProcessor.Run<FileProgramProcessor>(path);
+TextFileProcessor.TextFileProcessor.Run<FileProgramProcessor>(path);
 
 
-public class FileProgramProcessor : TextProcessor {
+public class FileProgramProcessor : TextFileProcessor.TextFileProcessor {
 
     private int _count = 0;
     private string _searchWord = "";
