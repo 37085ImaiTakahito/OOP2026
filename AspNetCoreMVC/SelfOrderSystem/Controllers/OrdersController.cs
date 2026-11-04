@@ -80,4 +80,24 @@ public class OrdersController : Controller {
         return RedirectToAction(nameof(Complete),
             new { id = order.PublicId });
     }
-}
+
+    [HttpGet]
+    public async Task<IActionResult> Complete(Guid id) {
+        var order = await LoadPublicOrderAsync(id);
+        return order == null ? NotFound() : View(order);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Status(Guid id) {
+        var order = await LoadPublicOrderAsync(id);
+        return order == null ? NotFound() : View(order);
+    }
+
+    private Task<Order?> LoadPublicOrderAsync(Guid publicId) {
+        return _db.Orders.AsNoTracking()
+            .Include(o => o.Items)
+            .ThenInclude(i => i.Product)
+            .SingleOrDefaultAsync(o => o.PublicId == publicId);
+    }
+} 
+
