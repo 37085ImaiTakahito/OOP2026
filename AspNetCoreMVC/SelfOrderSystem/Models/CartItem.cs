@@ -1,10 +1,18 @@
-﻿namespace SelfOrderSystem.Models;
+﻿using System.ComponentModel.DataAnnotations;
 
-// カート内の1商品を表す一時データ
+namespace SelfOrderSystem.Models;
+
 public class CartItem {
-    public int ProductId { get; set; }                           // 商品ID 
-    public string ProductName { get; set; } = string.Empty;      // 商品名 
-    public decimal UnitPrice { get; set; }                       // 単価 
-    public int Quantity { get; set; }                            // 数量 
-    public decimal LineTotal => UnitPrice * Quantity;            // 小計 
+    public int ProductId { get; set; }
+
+    [Required]
+    public string ProductName { get; set; } = string.Empty;
+
+    [Range(typeof(decimal), "0.01", "999999.99")]
+    public decimal UnitPrice { get; set; }
+
+    [Range(1, 99)]
+    public int Quantity { get; set; }
+
+    public decimal LineTotal => UnitPrice * Quantity;
 }
