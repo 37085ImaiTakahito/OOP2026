@@ -1,7 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using SelfOrderSystem.Data;
 using SelfOrderSystem.Services;
-using SelfOrderSystem.Hubs; 
+using SelfOrderSystem.Hubs;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
+using SelfOrderSystem.Models;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +35,19 @@ builder.Services.AddScoped<CartService>();                       // CartService‚
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddSignalR();
 
+// ƒXƒ^ƒbƒt‚ÌƒpƒXƒ[ƒhÆ‡—p‚ÌƒT[ƒrƒX 
+builder.Services.AddScoped<IPasswordHasher<StaffUser>,PasswordHasher<StaffUser>>();
+// Cookie ‚ğg‚Á‚½ƒƒOƒCƒ“•û®‚ğ“o˜^ 
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+.AddCookie(options => {
+    options.LoginPath = "/Account/Login";                       // –¢ƒƒOƒCƒ“‚Ì‘JˆÚæ 
+    options.AccessDeniedPath = "/Account/Denied";               // Œ ŒÀ•s‘«‚Ì‘JˆÚæ 
+    options.Cookie.HttpOnly = true;                             // JavaScript ‚©‚ç“Ç‚İæ‚è•s‰Â 
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;    // HTTPS ŒÀ’è 
+    options.ExpireTimeSpan = TimeSpan.FromHours(8);             // ”FØƒ`ƒPƒbƒg‚Ì—LŒøŠúŠÔ 
+});
+builder.Services.AddAuthorization();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment()) {
@@ -52,12 +69,16 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseSession();  // ‚±‚ÌƒŠƒNƒGƒXƒg‚ÅSession‚ğg‚¦‚é‚æ‚¤‚É‚·‚é
 
-app.UseAuthorization();
+app.UseAuthentication(); // ”FØCookie ‚©‚çƒƒOƒCƒ“ó‘Ô‚ğ•œŒ³ 
+app.UseAuthorization();  // Staff Œ ŒÀ‚È‚Ç‚ğŒŸ¸ 
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.MapHub<StaffOrdersHub>("/staffOrdersHub");
+
+// ‰‰ñ‚¾‚¯ƒXƒ^ƒbƒtƒAƒJƒEƒ“ƒg‚ğ“o˜^ 
+await StaffAccountSeeder.InitializeAsync(app.Services);
 
 app.Run();
